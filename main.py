@@ -1,5 +1,6 @@
 import pygame
 from constants import *
+from player import *
 
 def main():
     print("Starting Asteroids!")
@@ -11,8 +12,11 @@ def main():
     clk = pygame.time.Clock()
     dt = 0
 
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    x = SCREEN_WIDTH / 2
+    y = SCREEN_HEIGHT / 2
 
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    player = Player(x, y)
 
     
     while True:
@@ -22,6 +26,7 @@ def main():
                 return
 
         screen.fill(color="black",rect=None,special_flags=0)
+        player.draw(screen)
         pygame.display.flip()
         dt = clk.tick(60)/1000
         # print(f'fps= {1/dt}')
