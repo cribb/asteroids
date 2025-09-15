@@ -14,10 +14,9 @@ class Asteroid(CircleShape):
                            radius=self.radius,
                            width=2)
         
-    # Override the update() method so that it moves in a straight line at constant speed. 
-    # On each frame, it should add (self.velocity * dt) to its position (get self.velocity from
-    # its parent class, CircleShape).
     def update(self, dt):
         self.position += self.velocity * dt
 
     
+        
+        
