@@ -10,7 +10,7 @@ class Asteroid(CircleShape):
     def draw(self, screen):
         pygame.draw.circle(screen, 
                            color="white", 
-                           center=(self.x, self.y), 
+                           center=self.position, 
                            radius=self.radius,
                            width=2)
         
@@ -18,7 +18,6 @@ class Asteroid(CircleShape):
     # On each frame, it should add (self.velocity * dt) to its position (get self.velocity from
     # its parent class, CircleShape).
     def update(self, dt):
-        self.x += self.velocity * dt
-        self.y += self.velocity * dt
-        pass
+        self.position += self.velocity * dt
 
+    

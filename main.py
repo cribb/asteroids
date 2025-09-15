@@ -5,7 +5,7 @@ from asteroid import *
 from asteroidfield import *
 
 def main():
-    print("Starting Asteroids!")
+    print("Starting DisAsteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
@@ -23,7 +23,7 @@ def main():
 
     Player.containers = (updatable, drawable) # added here as static class variables to Player
     Asteroid.containers = (asteroids, updatable, drawable)
-    AsteroidField.containers = updatable
+    AsteroidField.containers = (updatable,)
 
     asteroidfield = AsteroidField()
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
@@ -35,13 +35,15 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
-        screen.fill(color="black",rect=None,special_flags=0)
-        
         updatable.update(dt)
+
+        screen.fill(color="black",rect=None,special_flags=0)    
+    
         for drawing in drawable:
             drawing.draw(screen)
         
         pygame.display.flip()
+
         dt = clk.tick(60)/1000
         # print(f'fps= {1/dt}')
 
