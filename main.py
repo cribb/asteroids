@@ -1,6 +1,8 @@
 import pygame
 from constants import *
 from player import *
+from asteroid import *
+from asteroidfield import *
 
 def main():
     print("Starting Asteroids!")
@@ -14,10 +16,16 @@ def main():
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    updatable, drawable = pygame.sprite.Group(), pygame.sprite.Group()
+    updatable = pygame.sprite.Group()
+    drawable  = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+    
 
-    Player.containers = (updatable, drawable) # added here as class variables to Player
+    Player.containers = (updatable, drawable) # added here as static class variables to Player
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = updatable
 
+    asteroidfield = AsteroidField()
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     # game loop    
@@ -46,3 +54,9 @@ def main():
 if __name__ == "__main__":
     main()
  
+
+
+# - In the initialization code in main (before the game loop starts), create a new 
+#   pygame.sprite.Group which will contain all of the asteroids.
+# - Like we did with the Player class, set the static containers field of the Asteroid 
+#   class to the new asteroids group, as well as the updatable and drawable groups.
