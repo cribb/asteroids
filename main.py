@@ -12,13 +12,15 @@ def main():
     clk = pygame.time.Clock()
     dt = 0
 
-    x = SCREEN_WIDTH / 2
-    y = SCREEN_HEIGHT / 2
-
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    player = Player(x, y)
 
-    
+    updatable, drawable = pygame.sprite.Group(), pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable) # added here as class variables to Player
+
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
+    # game loop    
     while True:
         # Make the game window's close ("x") button work
         for event in pygame.event.get():
@@ -26,8 +28,11 @@ def main():
                 return
 
         screen.fill(color="black",rect=None,special_flags=0)
-        player.update(dt)
-        player.draw(screen)
+        
+        updatable.update(dt)
+        for drawing in drawable:
+            drawing.draw(screen)
+        
         pygame.display.flip()
         dt = clk.tick(60)/1000
         # print(f'fps= {1/dt}')
