@@ -31,7 +31,7 @@ class CircleShape(pygame.sprite.Sprite):
         gap_distance = pygame.math.Vector2.distance_to(self.position, potential_collider.position)
 
         if gap_distance <= distance_trigger:            
-            print("Collision detected!")
+            # print("Collision detected!")
             return True
         else:
             return False
